@@ -62,8 +62,7 @@ def main():
             st.session_state["pdfquery"] = PDFQuery(st.session_state["OPENAI_API_KEY"])
         else:
             st.session_state["pdfquery"] = None
-
-    st.header("AI学习助手")
+    st.header("🎓 AI学习助手")
     st.caption("我是一个AI学习助手，提交文档并给出你的问题，我将在文档中检索答案")
     st.subheader("上传知识库（pdf）")
     new_chat()
