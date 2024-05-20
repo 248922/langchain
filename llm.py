@@ -6,7 +6,7 @@ import os
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from teacher_utils import create_agent
-from base_prompt import get_base_prompt
+#from base_prompt import get_base_prompt
 
 
 class PDFQuery:
