@@ -47,8 +47,7 @@ def read_and_save_file():
         os.remove(file_path)
 
 def new_chat():
-    if "messages" not in st.session_state:
-        st.session_state.messages = []
+    st.session_state["messages"] = []
     st.session_state["chat_history"] = []
     st.session_state["messages"].append(("您好，很高兴遇见您！我是您的AI学习助手，请告诉我你的问题。", False))
 
@@ -56,10 +55,9 @@ def is_openai_api_key_set() -> bool:
     return len(st.session_state["OPENAI_API_KEY"]) > 0
 
 def main():
-    os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
     if len(st.session_state) == 0:
         st.session_state["messages"] = []
-        st.session_state["OPENAI_API_KEY"] = os.environ.get("OPENAI_API_KEY", "")
+        st.session_state["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
         if is_openai_api_key_set():
             st.session_state["pdfquery"] = PDFQuery(st.session_state["OPENAI_API_KEY"])
         else:
