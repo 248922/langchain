@@ -1,7 +1,7 @@
 import os
 import tempfile
 import streamlit as st
-#from langchain_core.messages import HumanMessage, AIMessage
+from langchain_core.messages import HumanMessage, AIMessage
 from streamlit_chat import message
 from llm import PDFQuery
 
@@ -19,8 +19,8 @@ def process_input():
         with st.session_state["thinking_spinner"], st.spinner(f"Thinking"):
             query_text = st.session_state["pdfquery"].ask(user_text,chat_history)
 
-        #st.session_state["chat_history"].append(HumanMessage(content=user_text))
-        #st.session_state["chat_history"].append(AIMessage(content=query_text))
+        st.session_state["chat_history"].append(HumanMessage(content=user_text))
+        st.session_state["chat_history"].append(AIMessage(content=query_text))
 
         st.session_state["messages"].append((user_text, True))
         st.session_state["messages"].append((query_text, False))
