@@ -8,8 +8,6 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from teacher_utils import create_agent
 from base_prompt import get_base_prompt
 
-os.environ['OPENAI_API_KEY'] = "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"
-
 
 class PDFQuery:
     def __init__(self, openai_api_key = None) -> None:

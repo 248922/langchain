@@ -59,7 +59,7 @@ def is_openai_api_key_set() -> bool:
     return len(st.session_state["OPENAI_API_KEY"]) > 0
 
 def main():
-    os.environ["OPENAI_API_KEY"] = "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"
+    os.environ["OPENAI_API_KEY"] = "#####"
     if len(st.session_state) == 0:
         st.session_state["messages"] = []
         st.session_state["OPENAI_API_KEY"] = os.environ.get("OPENAI_API_KEY", "")

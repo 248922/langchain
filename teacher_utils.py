@@ -4,8 +4,6 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.tools import create_retriever_tool
 
 
-#openai_key="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"
-
 def create_agent(input_prompt:str,db,llm):
     prompt = ChatPromptTemplate.from_messages([
         (
