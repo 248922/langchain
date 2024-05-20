@@ -32,9 +32,6 @@ def create_agent():
     else:
         st.session_state["pdfquery"].create_prompt(st.session_state["prompt_input"])
 
-    hello_text = "您好，很高兴遇见您！我是您的AI学习助手，请告诉我你的问题。"
-    st.session_state["messages"].append((hello_text, False))
-
 def read_and_save_file():
     st.session_state["pdfquery"].forget()  # to reset the knowledge base
     st.session_state["messages"] = []
@@ -50,15 +47,16 @@ def read_and_save_file():
         os.remove(file_path)
 
 def new_chat():
-    st.session_state["messages"] = []
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
     st.session_state["chat_history"] = []
-    st.success("对话已重置，您可以开始新对话。")
+    st.session_state["messages"].append(("您好，很高兴遇见您！我是您的AI学习助手，请告诉我你的问题。", False))
 
 def is_openai_api_key_set() -> bool:
     return len(st.session_state["OPENAI_API_KEY"]) > 0
 
 def main():
-    os.environ["OPENAI_API_KEY"] = "#####"
+    os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
     if len(st.session_state) == 0:
         st.session_state["messages"] = []
         st.session_state["OPENAI_API_KEY"] = os.environ.get("OPENAI_API_KEY", "")
@@ -70,7 +68,7 @@ def main():
     st.header("AI学习助手")
     st.caption("我是一个AI学习助手，提交文档并给出你的问题，我将在文档中检索答案")
     st.subheader("上传知识库（pdf）")
-    st.session_state["chat_history"] = []
+    new_chat()
     st.file_uploader(
         "Upload document",
         type=["pdf"],
