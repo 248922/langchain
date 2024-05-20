@@ -24,8 +24,6 @@ class PDFQuery:
         if self.chain is None:
             output = "Please, add a document."
         else:
-            #docs = self.db.get_relevant_documents(question)
-            #question='总结这篇论文Unsupervised opinion summarization as copycat-review generation'
             response = self.chain.invoke({
             "chat_history": chat_history,
             "input": question
