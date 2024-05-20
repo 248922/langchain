@@ -39,7 +39,6 @@ def read_and_save_file():
     st.session_state["pdfquery"].forget()  # to reset the knowledge base
     st.session_state["messages"] = []
     st.session_state["user_input"] = ""
-    st.session_state["chat_history"]=[]
 
     for file in st.session_state["file_uploader"]:
         with tempfile.NamedTemporaryFile(delete=False) as tf:
@@ -71,6 +70,7 @@ def main():
     st.header("AI学习助手")
     st.caption("我是一个AI学习助手，提交文档并给出你的问题，我将在文档中检索答案")
     st.subheader("上传知识库（pdf）")
+    st.session_state["chat_history"] = []
     st.file_uploader(
         "Upload document",
         type=["pdf"],
