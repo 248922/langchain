@@ -12,7 +12,7 @@ from teacher_utils import create_agent
 class PDFQuery:
     def __init__(self, openai_api_key = None) -> None:
         self.embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
-        self.text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
+        self.text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
         self.llm = ChatOpenAI(api_key=openai_api_key)
         self.chain = None
         self.db = None

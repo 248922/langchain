@@ -57,7 +57,8 @@ def is_openai_api_key_set() -> bool:
 def main():
     if len(st.session_state) == 0:
         st.session_state["messages"] = []
-        st.session_state["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+        #st.session_state["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+        st.session_state["OPENAI_API_KEY"] = "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"
         if is_openai_api_key_set():
             st.session_state["pdfquery"] = PDFQuery(st.session_state["OPENAI_API_KEY"])
         else:
@@ -80,12 +81,16 @@ def main():
     st.subheader("教师输入提示词创建智能体")
     st.text_input("在下方输入提示词",key="prompt_input", disabled=not is_openai_api_key_set(),on_change=create_agent)
     st.divider()
-    st.subheader("聊天框")
     display_messages()
-
+    #user_input = st.chat_input("请输入你的问题", key="user_input")
+    #if user_input:
+    #    process_input()
     st.text_input("请输入你的问题", key="user_input", disabled=not is_openai_api_key_set(), on_change=process_input)
     if st.button("开始新对话", key="new_chat_button", disabled=not is_openai_api_key_set()):
         new_chat()
+    st.page_link("streamlitui.py", label="Home")
+    st.page_link("pages/🧑‍🏫 teachers.py", label="🧑‍🏫 teachers")
+    st.page_link("pages/🧑 Students.py", label="🧑 Students")
     st.divider()
 
 if __name__ == "__main__":
