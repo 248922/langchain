@@ -36,7 +36,6 @@ class PDFQuery:
         self.db = FAISS.from_documents(splitted_documents, self.embeddings).as_retriever(search_type="similarity", search_kwargs={"k": 6})
 
     def create_prompt(self, prompt_input: str)-> None:
-        combined_prompt = f"{self.system_prompt}{prompt_input}"
         self.chain = create_agent(input_prompt=prompt_input, db=self.db, llm=self.llm)
 
     def forget(self) -> None:
