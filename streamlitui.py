@@ -57,8 +57,7 @@ def is_openai_api_key_set() -> bool:
 def main():
     if len(st.session_state) == 0:
         st.session_state["messages"] = []
-        api_key=st.secrets["OPENAI_API_KEY"]
-        st.session_state["OPENAI_API_KEY"] = api_key
+        st.session_state["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
         if is_openai_api_key_set():
             st.session_state["pdfquery"] = PDFQuery(st.session_state["OPENAI_API_KEY"])
         else:
