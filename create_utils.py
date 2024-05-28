@@ -15,7 +15,7 @@ def create_agent(input_prompt:str,db,llm):
     retriever_tool = create_retriever_tool(
         db,
         "retriever_tool",
-        "You must use this tool!",
+        "You should try to use this tool !",
     )
     tools = [retriever_tool]
     agent = create_openai_functions_agent(llm, tools, prompt)

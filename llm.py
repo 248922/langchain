@@ -22,21 +22,18 @@ class PDFQuery:
         if self.chain is None:
             output = "Please, add a document."
         else:
-            try:
-                response = self.chain.invoke({
-                "chat_history": chat_history,
-                "input": question
-                })
-                output = response["output"]
-            except:
-                output = "我没有在知识库中找到相关内容，请询问课程相关内容！"
+            response = self.chain.invoke({
+            "chat_history": chat_history,
+            "input": question
+            })
+            output = response["output"]
         return output
 
     def ingest(self, file_path: os.PathLike) -> None:
         loader = PyPDFLoader(file_path)
         documents = loader.load()
         splitted_documents = self.text_splitter.split_documents(documents)
-        self.db = FAISS.from_documents(splitted_documents, self.embeddings).as_retriever(search_type="similarity", search_kwargs={"k": 6})
+        self.db = FAISS.from_documents(splitted_documents, self.embeddings).as_retriever(search_type="similarity", search_kwargs={"k": 10})
 
     def create_prompt(self, prompt_input: str)-> None:
         self.chain = create_agent(input_prompt=prompt_input, db=self.db, llm=self.llm)
