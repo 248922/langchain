@@ -57,8 +57,7 @@ def is_openai_api_key_set() -> bool:
 def main():
     if len(st.session_state) == 0:
         st.session_state["messages"] = []
-        #st.session_state["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
-        st.session_state["OPENAI_API_KEY"] = "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"
+        st.session_state["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
         if is_openai_api_key_set():
             st.session_state["pdfquery"] = PDFQuery(st.session_state["OPENAI_API_KEY"])
         else:
@@ -81,10 +80,7 @@ def main():
     st.text_input("在下方输入提示词",key="prompt_input",on_change=create_agent)
     st.divider()
     display_messages()
-    user_input = st.chat_input("请输入你的问题", key="user_input",on_submit=process_input)
-    #if user_input:
-    #    process_input()
-    #st.text_input("请输入你的问题", key="user_input", on_change=process_input)
+    st.chat_input("请输入你的问题", key="user_input",on_submit=process_input)
     st.button("开始新对话", key="new_chat_button",on_click=new_chat)
     st.divider()
     st.page_link("streamlitui.py", label="Home")
