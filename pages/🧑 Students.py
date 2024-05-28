@@ -36,7 +36,7 @@ def create_agent(agent_name:str):
                 prompt="You are an AI teaching assistant, and you need to answer students' questions based on the content in the local knowledge base.Remember to answer questions in Chinese."
             combined_prompt = f"{base_prompt}{prompt}"
             st.session_state["pdfquery"].create_prompt(combined_prompt)
-            st.session_state["pdfquery"].ingest("计算机组成原理与系统结构课程教学改革探讨_郭玉峰.pdf")
+            st.session_state["pdfquery"].ingest("计算机组成与系统结构（第二版）裘雪红 西电出版社.pdf")
         st.session_state["create"]="ok"
 
 def delete_agent():
