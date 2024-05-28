@@ -22,11 +22,14 @@ class PDFQuery:
         if self.chain is None:
             output = "Please, add a document."
         else:
-            response = self.chain.invoke({
-            "chat_history": chat_history,
-            "input": question
-            })
-            output = response["output"]
+            try:
+                response = self.chain.invoke({
+                "chat_history": chat_history,
+                "input": question
+                })
+                output = response["output"]
+            except:
+                output = "我没有在知识库中找到相关内容，请询问课程相关内容！"
         return output
 
     def ingest(self, file_path: os.PathLike) -> None:
