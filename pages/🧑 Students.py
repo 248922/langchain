@@ -91,7 +91,7 @@ def main():
         st.markdown('<p style="text-align: center;font-size: 24px;">计算机组成与系统结构（第二版）裘雪红 西电出版社</p>', unsafe_allow_html=True)
         pdf_url = "https://248922.github.io/langchain/计算机组成原理与系统结构课程教学改革探讨_郭玉峰.pdf"
         pdfjs_viewer_url = f"https://mozilla.github.io/pdf.js/web/viewer.html?file={pdf_url}"
-        st.components.v1.iframe(pdfjs_viewer_url, width=750, height=700)
+        st.components.v1.iframe(pdfjs_viewer_url, width=500, height=700)
     with col3:
         st.subheader("📝 AI 学习助手")
         st.caption("🚀 A streamlit AI learning assistant powered by OpenAI")
