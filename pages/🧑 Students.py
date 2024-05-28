@@ -36,7 +36,7 @@ def create_agent(agent_name:str):
                 prompt="You are an AI teaching assistant, and you need to answer students' questions based on the content in the local knowledge base.Remember to answer questions in Chinese."
             combined_prompt = f"{base_prompt}{prompt}"
             st.session_state["pdfquery"].create_prompt(combined_prompt)
-            st.session_state["pdfquery"].ingest("计算机组成与系统结构（第二版）裘雪红 西电出版社.pdf")
+            st.session_state["pdfquery"].ingest("计算机组成原理与系统结构课程教学改革探讨_郭玉峰.pdf")
         st.session_state["create"]="ok"
 
 def delete_agent():
@@ -88,8 +88,8 @@ def main():
 
     col1,col2,col3=st.columns([5,2,5])
     with col1:
-        st.markdown('<p style="text-align: center;font-size: 24px;">计算机组成与系统结构（第二版）裘雪红 西电出版社</p>', unsafe_allow_html=True)
-        pdf_url = "https://248922.github.io/langchain/计算机组成与系统结构（第二版）裘雪红 西电出版社.pdf"
+        st.markdown('<p style="text-align: center;font-size: 20px;">计算机组成与系统结构（第二版）裘雪红 西电出版社</p>', unsafe_allow_html=True)
+        pdf_url = "https://248922.github.io/langchain/计算机组成原理与系统结构课程教学改革探讨_郭玉峰.pdf"
         pdfjs_viewer_url = f"https://mozilla.github.io/pdf.js/web/viewer.html?file={pdf_url}"
         st.components.v1.iframe(pdfjs_viewer_url, width=500, height=700)
     with col3:
