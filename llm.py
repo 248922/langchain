@@ -5,18 +5,18 @@ from langchain_community.document_loaders import PyPDFLoader
 import os
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from teacher_utils import create_agent
-#from base_prompt import get_base_prompt
+from create_utils import create_agent
+from base_prompt import get_base_prompt
 
 
 class PDFQuery:
     def __init__(self, openai_api_key = None) -> None:
         self.embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
-        self.text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
-        self.llm = ChatOpenAI(api_key=openai_api_key)
+        self.text_splitter = RecursiveCharacterTextSplitter(chunk_size=5000, chunk_overlap=10)
+        self.llm = ChatOpenAI(api_key=openai_api_key,model="gpt-3.5-turbo", temperature=0)
         self.chain = None
         self.db = None
-        #self.system_prompt=get_base_prompt()
+        self.system_prompt=get_base_prompt()
 
     def ask(self, question: str,chat_history: str) -> str:
         if self.chain is None:
@@ -30,13 +30,13 @@ class PDFQuery:
         return output
 
     def ingest(self, file_path: os.PathLike) -> None:
-        loader = PyPDFLoader(file_path, extract_images=True)
+        loader = PyPDFLoader(file_path)
         documents = loader.load()
         splitted_documents = self.text_splitter.split_documents(documents)
         self.db = FAISS.from_documents(splitted_documents, self.embeddings).as_retriever(search_type="similarity", search_kwargs={"k": 6})
 
     def create_prompt(self, prompt_input: str)-> None:
-        #combined_prompt = f"{self.system_prompt}{prompt_input}"
+        combined_prompt = f"{self.system_prompt}{prompt_input}"
         self.chain = create_agent(input_prompt=prompt_input, db=self.db, llm=self.llm)
 
     def forget(self) -> None:
