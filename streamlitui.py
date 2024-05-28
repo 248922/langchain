@@ -83,9 +83,9 @@ def main():
     st.chat_input("请输入你的问题", key="user_input",on_submit=process_input)
     st.button("开始新对话", key="new_chat_button",on_click=new_chat)
     st.divider()
-    st.page_link("streamlitui.py", label="Home")
-    st.page_link("pages/🧑‍🏫 teachers.py", label="🧑‍🏫 teachers")
-    st.page_link("pages/🧑 Students.py", label="🧑 Students")
+    #st.page_link("streamlitui.py", label="Home")
+    #st.page_link("pages/🧑‍🏫 teachers.py", label="🧑‍🏫 teachers")
+    #st.page_link("pages/🧑 Students.py", label="🧑 Students")
 
 if __name__ == "__main__":
     main()
