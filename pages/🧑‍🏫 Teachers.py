@@ -30,10 +30,9 @@ big_button_style = """
 def none():
     1
 def delete_agent():
-    1
+    initialize()
 def edit_agent():
     1
-
 
 def on_sure_click():
     st.session_state["Chapter_Name"].append(st.session_state["Chapter_Name_input"])
@@ -53,7 +52,7 @@ def display_chapter():
         st.button("➖ 删除智能体", key="delete_chapter", on_click=delete_agent)
     st.write(" ")
     for i, (name) in enumerate(st.session_state["Chapter_Name"]):
-        col0,col1, col2, col3 = st.columns([0.3,1.7,9,1])
+        col0, col1, col2, col3 = st.columns([0.3,1.7,9,1])
         with col1:
             st.write(" ")
             st.markdown("<p style='font-size: 24px;font-weight: bold;'>名称：</p>", unsafe_allow_html=True)
@@ -71,9 +70,7 @@ def display_chapter():
                 prompt=st.session_state["prompt"][i]
             st.info(prompt)
             st.info(st.session_state["file"])
-        #st.secrets["agent"]=[name,prompt,file_path]
-
-
+        st.session_state["agent"]=[name,prompt,file_path]
 
 def read_and_save_file():
     for file in st.session_state["file_uploader"]:
@@ -83,12 +80,11 @@ def read_and_save_file():
             st.session_state["file_path"].append(file_path)
         os.remove(file_path)
 
-
-
 def initialize():
     st.session_state["file_path"] = []
     st.session_state["Chapter_Name"]=[]
     st.session_state["prompt"]=[]
+    st.session_state["file"]=[]
 
 def main():
     initialize()

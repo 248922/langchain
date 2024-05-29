@@ -29,9 +29,8 @@ def process_input():
 def create_agent(agent_name:str):
     if "create" not in st.session_state:
         if agent_name=="计算机组成与体系结构":
-            #name,prompt,file_path=st.secrets["agent"]
             name, prompt, file_path=["计算机组成与体系结构","default","计算机组成与系统结构（第二版）裘雪红 西电出版社.pdf"]
-            st.session_state["pdfquery"].ingest("计算机组成与系统结构（第二版）裘雪红 西电出版社.pdf")
+            st.session_state["pdfquery"].ingest("计算机组成原理与系统结构课程教学改革探讨_郭玉峰.pdf")
             base_prompt = get_base_prompt()
             if prompt=="default" or prompt=="":
                 prompt="You are an AI teaching assistant, and you need to answer students' questions based on the content in the local knowledge base.Remember to answer questions in Chinese."
@@ -59,7 +58,8 @@ def new_chat():
 
 def initialize():
     if "init" not in st.session_state:
-        st.session_state["OPENAI_API_KEY"] =st.secrets["OPENAI_API_KEY"]
+        st.session_state["OPENAI_API_KEY"] ="sk-proj-z3EGPdku8gAI5IiUX87ZT3BlbkFJ8L2fp7nSzWpI2vapGajc"
+        #st.session_state["OPENAI_API_KEY"] =st.secrets["OPENAI_API_KEY"]
         st.session_state["pdfquery"] = PDFQuery(st.session_state["OPENAI_API_KEY"])
         st.session_state["ingestion_spinner"] = st.empty()
         new_chat()
@@ -84,8 +84,6 @@ def main():
             accept_multiple_files=True,
         )
         st.button("开始新对话", key="new_chat_button", on_click=new_chat)
-
-
     col1,col2,col3=st.columns([5,1,5])
     with col1:
         st.markdown('<p style="text-align: center;font-size: 18px;">计算机组成与系统结构（第二版）裘雪红 西电出版社</p>', unsafe_allow_html=True)
@@ -96,6 +94,8 @@ def main():
         st.subheader("📝 AI 学习助手")
         st.caption("🚀 A streamlit AI learning assistant powered by OpenAI")
         display_messages()
+        for i in range(20):
+            st.write(" ")
         st.divider()
         st.chat_input("请输入你的问题", key="user_input",on_submit=process_input)
 
